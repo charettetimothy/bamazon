@@ -8,20 +8,17 @@ This is an Amazon-like storefront that uses MySQL and NodeJS. The app will take 
 
 ## Getting Started
 
-In order to run this application you must have NodeJS installed on your system. A list of node packages are located in the package,json file.
+In order to run this application you must have NodeJS installed on your system. A list of node packages are located in the package.json file.
 
 ## Built With
 
 * [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - High-level programming language.
 * [MAMP](https://www.mamp.info/en/) - Local server enviroment.
 * [MySQL](https://www.mysql.com/products/workbench/) - Visual tool for database architects.
-* [Node.js](https://nodejs.org/en/) - JavaScript run-time environment.
+* [Node.js](https://nodejs.org/en/) - Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser.
 * [npm](https://www.npmjs.com/) - npm is a package manager for the JavaScript programming language.
 * [VSC](https://code.visualstudio.com/) - Visual Studio Code is a source code editor developed by Microsoft.
 * [S>G](https://www.screentogif.com/) - Screen, webcam and sketchboard recorder with an integrated editor.
-
-
-
 
 ## Authors
 
