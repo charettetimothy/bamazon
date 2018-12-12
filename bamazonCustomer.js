@@ -4,14 +4,8 @@ require("console.table");
 
 var connection = mysql.createConnection({
   host: "localhost",
-
-  // Your port; if not 3306
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
   password: "root",
   database: "bamazon"
 });
@@ -25,7 +19,6 @@ connection.connect(function (err) {
 function showTable() {
   connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
-    // console.log(res.RowDataPacket[0].id)
     console.table(res);
     start();
   });
@@ -36,16 +29,15 @@ function start() {
     .prompt([{
         name: "itemID",
         type: "input",
-        message: "What is the product ID of the item you would like to purchase?\n"
+        message: "What is the product ID of the item you would like to purchase? "
       },
       {
         name: "itemQuantity",
         type: "input",
-        message: "How many would you like to purchase?\n"
+        message: "How many would you like to purchase? "
       }
     ])
     .then(function (answer) {
-      // SELECT * FROM products WHERE ?
       // SELECT stock_quantity FROM products WHERE ?
       connection.query("SELECT * FROM products WHERE ?", {
         id: answer.itemID
@@ -56,25 +48,16 @@ function start() {
         } else {
           var itemID = answer.itemID;
           var itemQuantity = res[0].stock_quantity - answer.itemQuantity;
-          updateTable(itemID, itemQuantity);
+          var totalCost = res[0].price * answer.itemQuantity
+          updateTable(itemID, itemQuantity, totalCost);
         }
         if (err) throw err;
-        // connection.end();
       });
     })
 }
 
-function updateTable(itemID, itemQuantity) {
-  // console.log("Updating all" +   "Rocky Road quantities...\n");
-  // var query = connection.query("SELECT * FROM products", function (err, res) {
-  //   console.log("Here is a list of our updated inventory.\n")
-  //   console.table(res)
-  //   console.log(query.sql);
-  //   console.log("itemID: " + itemID);
-  //   console.log("itemQuantity: " + itemQuantity);
-  // });
+function updateTable(itemID, itemQuantity, totalCost) {
   connection.query(
-
     "UPDATE products SET ? WHERE ?",
     [{
         stock_quantity: itemQuantity
@@ -84,21 +67,19 @@ function updateTable(itemID, itemQuantity) {
       }
     ],
     function (err, res) {
-      console.log(res.affectedRows + " products updated!\n");
+      console.log("\n Great here you go. Your total for this transaction is $" + totalCost + ".\n" + res.affectedRows + " products updated!\n");
       inquirer
         .prompt([{
           name: "anotherPurchase",
           type: "confirm",
-          message: "Would you like to amke another purchase?\n"
+          message: "Would you like to make another purchase?\n"
         }])
         .then(function (answer) {
           if (answer.anotherPurchase) {
             showTable();
+          } else  {
+            connection.end();
           }
         })
-
-      //  connection.end();
-
-
     })
 }
