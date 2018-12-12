@@ -15,7 +15,7 @@ In order to run this application you must have NodeJS installed on your system. 
 * [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - High-level programming language.
 * [MAMP](https://www.mamp.info/en/) - Local server enviroment.
 * [MySQL](https://www.mysql.com/products/workbench/) - Visual tool for database architects.
-* [Node.js](https://nodejs.org/en/) - Open-source, cross-platform JavaScript run-time environment                that executes JavaScript code outside of a browser.
+* [Node.js](https://nodejs.org/en/) - Open-source run-time environment that executes JS code outside of a browser.
 * [npm](https://www.npmjs.com/) - npm is a package manager for the JavaScript programming language.
 * [VSC](https://code.visualstudio.com/) - Visual Studio Code is a source code editor developed by Microsoft.
 * [S>G](https://www.screentogif.com/) - Screen, webcam and sketchboard recorder with an integrated editor.
