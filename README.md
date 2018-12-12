@@ -10,7 +10,7 @@ This is an Amazon-like storefront that uses MySQL and NodeJS. The app will take 
 
 In order to run this application you must have NodeJS installed on your system. A list of node packages are located in the package,json file.
 
-### Technologies Used
+## Technologies Used
 
 - NodeJS
 - JavaScript
