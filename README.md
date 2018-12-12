@@ -26,6 +26,4 @@ In order to run this application you must have NodeJS installed on your system. 
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Hat tip to anyone whose code was used.
