@@ -2,7 +2,7 @@
 
 This is an Amazon-like storefront that uses MySQL and NodeJS. The app will take in orders from customers and update stock from the store's inventory and provide a total cost for the customer.
 
-## Demo
+## Demo - Customer
 
 ![bamazon](./bamazon.gif)
 
