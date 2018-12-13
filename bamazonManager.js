@@ -39,7 +39,8 @@ function start() {
                     addNewProduct();
                     break;
                 case "End shift and go home!":
-                    connectionEnd();
+                    console.log("Goodnight!")
+                    connection.end();
                     break;
                 default:
                     console.log("You messed up kid!")
@@ -47,17 +48,10 @@ function start() {
         })
 }
 
-function showTable() {
-    connection.query("SELECT * FROM products", function (err, res) {
-        if (err) throw err;
-        console.table(res);
-    });
-}
-
 function viewProducts() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
-        console.log("Here is a list of all of our current products.\n")
+        console.log("Here is a list of our updated inventory.")
         console.table(res);
         managerPromptDos();
     });
@@ -95,24 +89,11 @@ function addInventory() {
             .then(function (answer) {
                 var managerProduct = answer.managerProduct;
                 var managerQuantity = answer.managerQuantity;
-                // console.table(res)
-                connection.query(
-                    "UPDATE products SET ? WHERE ?",
-                    [{
-                            product_name: managerProduct
-                        },
-                        {
-                            stock_quantity: managerQuantity
-                        }
-                    ],
-                    function (err, res) {
-                        if (err) throw err;
-                        console.log(managerProduct);
-                        console.log(managerQuantity);
-                        console.log(res.affectedRows + " products updated!\n");
-                        showTable();
-                    }
-                )
+                let sqlQuery = `update products set stock_quantity = stock_quantity + ${managerQuantity} where id = ${managerProduct}`
+                connection.query(sqlQuery, function () {
+                    console.log("Update Successful. Here is an updated inventory list.");
+                    viewProducts();
+                })
             })
     });
 }
@@ -122,7 +103,7 @@ function managerPromptDos() {
         .prompt([{
             name: "anotherTask",
             type: "confirm",
-            message: "Is there anything else you would like to do?"
+            message: "Is there anything else I can do for you?"
         }])
         .then(function (answer) {
             if (answer.anotherTask) {
@@ -134,9 +115,46 @@ function managerPromptDos() {
         })
 }
 
-function connectionEnd() {
-    console.log("Goodnight!")
-    connection.end();
+function addNewProduct() {
+    inquirer
+        .prompt([{
+                name: "managerProduct",
+                type: "input",
+                message: "What is the name of the product you would like to add?"
+            },
+            {
+                name: "managerDepartment",
+                type: "input",
+                message: "What department would you like to place it in?"
+
+            },
+            {
+                name: "managerPrice",
+                type: "input",
+                message: "What would you like to set the cost to be?"
+            },
+            {
+                name: "managerQuantity",
+                type: "input",
+                message: "How many would you like to add to our inventory?"
+                
+            }
+        ])
+        .then(function (answer) {
+            var managerProduct = answer.managerProduct;
+            var managerDepartment = answer.managerDepartment;
+            var managerQuantity = answer.managerQuantity;
+            var managerPrice = answer.managerPrice;
+            var sqlQuery = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?";
+            var values = [
+                [managerProduct, managerDepartment, managerPrice, managerQuantity]
+            ];
+            connection.query(sqlQuery, [values], function (err, result) {
+                if (err) throw err;
+                console.log("Number of records inserted: " + result.affectedRows);
+                viewProducts();
+            });
+        });
 }
 
 start();
