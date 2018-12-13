@@ -22,7 +22,7 @@ In order to run this application you must have NodeJS installed on your system. 
 
 ## Authors
 
-* **Timothy Charette** - *Initial work* - [charettetimothy](https://github.com/charettetimothy)
+* **Timothy Charette** - *Initial work* - [Github](https://github.com/charettetimothy)
 
 ## Acknowledgments
 

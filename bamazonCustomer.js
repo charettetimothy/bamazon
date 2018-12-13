@@ -43,8 +43,8 @@ function start() {
         id: answer.itemID
       }, function (err, res) {
         if (answer.itemQuantity > res[0].stock_quantity) {
-          console.log("\nInsufficient quantity! Please select another item.\n")
-          start();
+          console.log("\nInsufficient quantity! Would you like to make another purchase?\n")
+          anotherPurchaseDos();
         } else {
           var itemID = answer.itemID;
           var itemQuantity = res[0].stock_quantity - answer.itemQuantity;
@@ -67,7 +67,7 @@ function updateTable(itemID, itemQuantity, totalCost) {
       }
     ],
     function (err, res) {
-      console.log("\n Great here you go. Your total for this transaction is $" + totalCost + ".\n" + res.affectedRows + " products updated!\n");
+      console.log("\nGreat here you go. Your total for this transaction is $" + totalCost + ".\n" + res.affectedRows + " products updated!\n");
       inquirer
         .prompt([{
           name: "anotherPurchase",
@@ -82,4 +82,21 @@ function updateTable(itemID, itemQuantity, totalCost) {
           }
         })
     })
+}
+
+function anotherPurchaseDos() {
+  inquirer
+      .prompt([{
+          name: "anotherPurchaseDos",
+          type: "confirm",
+          message: "Would you like to make another purchase?"
+      }])
+      .then(function (answer) {
+          if (answer.anotherPurchaseDos) {
+              showTable();
+          } else {
+              console.log("Ok. Have a great day! GoodBye.")
+              connection.end();
+          }
+      })
 }
