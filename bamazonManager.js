@@ -137,7 +137,7 @@ function addNewProduct() {
                 name: "managerQuantity",
                 type: "input",
                 message: "How many would you like to add to our inventory?"
-                
+
             }
         ])
         .then(function (answer) {

@@ -13,6 +13,14 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE departments (
+  id INT NOT NULL AUTO_INCREMENT,
+  department_id VARCHAR(50) NULL,
+  department_name VARCHAR(50) NULL,
+  over_head_costs INT NULL,
+  PRIMARY KEY (id)
+);
+
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Pancake Mix", "Food", 5, 100),
 ("Boots", "Clothing", 100, 10),
